@@ -2,11 +2,13 @@ import { Job, JobSimilarCard } from '@/entities/job';
 import { ReviewList } from '@/entities/review';
 import { UserPreviewCard } from '@/entities/user';
 import { ExpandableText } from '@/shared/components/expandable-text';
+import { ROUTES } from '@/shared/config/routes';
 import { usePageProps } from '@/shared/hooks/use-page-props';
 import { Badge } from '@/shared/ui/badge';
 import { Button } from '@/shared/ui/button';
 import { Title } from '@/shared/ui/title';
 import { getDayLabel } from '@/shared/utils/get-day-label';
+import { router } from '@inertiajs/react';
 import clsx from 'clsx';
 
 interface JobGuestViewProps {
@@ -98,7 +100,7 @@ export const JobGuestView = (props: JobGuestViewProps) => {
                     <img src="/icons/chat.svg" />
                     Чат
                 </Button>
-                <Button>
+                <Button onClick={() => router.get(ROUTES.projectCreate(job.id))}>
                     <img src="/icons/arrow-up.svg" />
                     Откликнуться
                 </Button>

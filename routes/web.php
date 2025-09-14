@@ -18,8 +18,6 @@ use App\Http\Controllers\DisputController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FavoriteController;
 
-
-
 Route::get('/', function () {
     return Inertia::render('welcome.page');
 })->name('home');
@@ -88,6 +86,8 @@ Route::resource('project', ProjectController::class);
 Route::post('project/{id}/archive', [ProjectController::class, 'archive'])->name('project.archive');
 Route::post('project/{id}/activate', [ProjectController::class, 'activate'])->name('project.activate');
 Route::post('project/{id}/status/{status}', [ProjectController::class, 'status'])->name('project.status');
+Route::get('project/{id}/create', [ProjectController::class, 'create'])->name('project.create');
+
 
 // Canceled project routes
 Route::resource('canceled-project', CanceledProjectController::class);
@@ -108,6 +108,7 @@ Route::get('/favorites/tariffs', [FavoriteController::class, 'tariffs'])->name('
 Route::get('/favorites/customer-jobs/{jobId}/liked', [FavoriteController::class, 'customerJobsLiked'])->name('favorites.customer-jobs.liked');
 Route::get('/favorites/freelance-gigs/{gigId}/liked', [FavoriteController::class, 'freelanceGigsLiked'])->name('favorites.freelance-gigs.liked');
 Route::get('/favorites/tariffs/{tariffId}/liked', [FavoriteController::class, 'tariffsLiked'])->name('favorites.tariffs.liked');
+
 
 
 

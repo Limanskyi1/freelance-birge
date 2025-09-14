@@ -49,5 +49,8 @@ export const ROUTES = {
     search: 'search',
     searchShow: (categoryId: number) => `search/${categoryId}`,
     searchSuggestions: 'search/suggestions',
-    orderShow:(orderId:number) =>  `/orders/${orderId}`,
+    orderShow: (orderId: number) => `/orders/${orderId}`,
+    projectCreate: (projectId: number) => `/project/${projectId}/create`,
+    projectStore: `/project`,
+    projectShow: (projectId: number) => `/project/${projectId}`,
 };

@@ -5,10 +5,12 @@ export const useActive = () => {
 
     const activate = useCallback(() => setIsActive(true), []);
     const deactivate = useCallback(() => setIsActive(false), []);
+    const toggle = useCallback(() => setIsActive(prev => !prev), []);
 
     return {
         isActive,
         activate,
         deactivate,
+        toggle,
     };
 };

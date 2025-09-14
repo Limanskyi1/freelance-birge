@@ -1,5 +1,6 @@
 import { Gig } from '@/entities/gig';
 import { OrderArchiveCard, OrderCard, OrderTab, useGetOrders } from '@/entities/order';
+import { projectApi } from '@/entities/project';
 import { findLowestTarrifPrice } from '@/entities/tariff';
 import { Tariff } from '@/entities/tariff/model/types';
 import { withExpand } from '@/shared/components/hoc/with-expand';
@@ -7,12 +8,17 @@ import { ROUTES } from '@/shared/config/routes';
 import { statusIcons } from '@/shared/consts';
 import { Card } from '@/shared/ui/card';
 import { Link } from '@inertiajs/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const ExpandableOrderArchiveCard = withExpand(OrderArchiveCard);
 
 export const OrdersFreelancePage = () => {
+    const [projects, setProjects] = useState<Gig[]>([]);
     const { data } = useGetOrders();
+
+    useEffect(() => {
+        projectApi.getProjects().then((data) => setProjects(data.projects));
+    }, []);
 
     const [activeTab, setActiveTab] = useState<'orders' | 'service'>('orders');
 
@@ -57,6 +63,22 @@ export const OrdersFreelancePage = () => {
                     isOpen={activeTab === 'service'}
                 />
             </Link>
+            {activeTab === 'orders' && (
+                <div className="flex flex-col gap-2">
+                    {projects.map((project) => (
+                        <Link href={ROUTES.projectShow(project.id)} key={project.id}>
+                            <OrderCard
+                                icon={<img src={statusIcons[project.status]} className="w-7" />}
+                                title={project.customer_job.name}
+                                status={project.status}
+                                terms={project.terms}
+                                price={parseFloat(project.price)}
+                                count={0}
+                            />
+                        </Link>
+                    ))}
+                </div>
+            )}
             {activeTab === 'service' && (
                 <div className="flex flex-col gap-2">
                     {orders.map((order) => (

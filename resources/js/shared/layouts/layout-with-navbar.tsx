@@ -42,7 +42,6 @@ export const LayoutWithNavbar = ({ children }: { children: ReactNode }) => {
             >
                 {children}
             </div>
-            {/* {!isFocused && <div className="h-[83px]" />} */}
             <footer
                 className={classNames('w-full', {
                     hidden: isFocused,
